@@ -5,7 +5,7 @@ I manage all the logic related of changing dynamically this configuration presen
 "
 Class {
 	#name : #MiQueryListItemPresenter,
-	#superclass : #SpPresenter,
+	#superclass : #MiPresenter,
 	#instVars : [
 		'queryTypesDropListPresenter',
 		'parentQuery',
@@ -199,7 +199,9 @@ MiQueryListItemPresenter >> newQueryForClass: queryClass [
 	(parentQuery children includes: self query) ifTrue: [ 
 		parentQuery removeChild: self query ].
 
-	newQuery := queryClass defaultForParent: parentQuery.
+	newQuery := queryClass new
+		            parent: parentQuery;
+		            yourself.
 	parentQuery addChild: newQuery.
 	^ newQuery
 ]
@@ -267,7 +269,7 @@ MiQueryListItemPresenter >> updateQueryConfiguratorPresenterFor: queryClass [
 	| newQuery |
 	"Create the new query"
 	newQuery := self newQueryForClass: queryClass.
-
+	self root application consumeItem: newQuery.
 	"Instantiate the configuration presenter with the new created query"
 	self instantiateConfiguratorPresenterForQuery: newQuery.
 

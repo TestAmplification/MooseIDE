@@ -11,10 +11,10 @@ Class {
 	#category : #'MooseIDE-NewTools-Inspector'
 }
 
-{ #category : #specs }
-MiInspectorBrowser class >> defaultSpec [
+{ #category : #layout }
+MiInspectorBrowser class >> defaultLayout [
 
-	^ super defaultSpec
+	^ super defaultLayout
 		  add: #miInspector;
 		  yourself
 ]
@@ -32,7 +32,7 @@ MiInspectorBrowser class >> inspect: anObject forBuses: buses [
 
 	| newInstance |
 	newInstance := self on: anObject.
-	newInstance openWithSpec.
+	newInstance open.
 	newInstance beFrozen.
 	buses do: [ :aBus | newInstance followBus: aBus ].
 	^ newInstance
@@ -95,6 +95,7 @@ MiInspectorBrowser >> canFollowEntity: anEntity [
 { #category : #actions }
 MiInspectorBrowser >> followEntity: anEntity [
 
+	anEntity ifNil: [ ^ self ].
 	self model: anEntity.
 	miInspector model: self model.
 	self updateWindowTitle: self window

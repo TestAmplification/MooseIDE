@@ -14,9 +14,9 @@ Class {
 	#category : #'MooseIDE-Dependency-Tree'
 }
 
-{ #category : #specs }
-MiTreeBrowser class >> defaultSpec [
-	^ super defaultSpec
+{ #category : #layout }
+MiTreeBrowser class >> defaultLayout [
+	^ super defaultLayout
 		add: #tree;
 		yourself
 ]

@@ -59,20 +59,25 @@ MiNAryQueryPresenterTest >> queryClass [
 MiNAryQueryPresenterTest >> resetPresenterWithEntities: aMooseGroup [
 
 	| builder superPresenter |
-	browser := MiQueriesBrowser on: (FQRootQuery new
-			            result: aMooseGroup;
-			            yourself).
-	builder := MiQueriesListPresenter on: browser.
-	
+	browser := MiQueriesBrowser
+		           newApplication: MiTestApplication current
+		           model: (FQRootQuery new
+				            result: aMooseGroup;
+				            yourself).
+	builder := browser instantiate: MiQueriesListPresenter on: browser.
+
 	builder addNewFirstLevelQuery.
-	builder queryItemsPresenters last queryTypesDropList selectItem: FQBooleanQuery.
-	
+	builder queryItemsPresenters last queryTypesDropList selectItem:
+		FQBooleanQuery.
+
 	builder addNewFirstLevelQuery.
-	builder queryItemsPresenters last queryTypesDropList selectItem: FQBooleanQuery.
-	
+	builder queryItemsPresenters last queryTypesDropList selectItem:
+		FQBooleanQuery.
+
 	builder addNewFirstLevelQuery.
-	builder queryItemsPresenters last queryTypesDropList selectItem: FQBooleanQuery.
-	
+	builder queryItemsPresenters last queryTypesDropList selectItem:
+		FQBooleanQuery.
+
 	superPresenter := builder componentList items third.
 	superPresenter queryTypesDropList selectItem: self queryClass.
 	presenter := superPresenter queryConfiguratorPresenter
@@ -90,8 +95,7 @@ MiNAryQueryPresenterTest >> testNormalQueryInitialization [
 
 	presenter subqueryDropLists first selectIndex: 1.
 	presenter subqueryDropLists second selectIndex: 2.
-	self assert: presenter query class identicalTo: self queryClass.
-	self assert: presenter query isValid
+	self assert: presenter query class identicalTo: self queryClass
 ]
 
 { #category : #tests }

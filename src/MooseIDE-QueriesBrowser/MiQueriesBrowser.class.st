@@ -107,7 +107,7 @@ MiQueriesBrowser >> initializeLayout [
 	tempLayout := SpBoxLayout newTopToBottom
 		              spacing: 5;
 		              yourself.
-	tempLayout add: self class defaultSpec expand: false.
+	tempLayout add: self class defaultLayout expand: false.
 	tempLayout add: (SpPanedLayout new
 			 add: queriesListPresenter;
 			 add: queryNotebookPresenter;
@@ -141,8 +141,9 @@ MiQueriesBrowser >> initializePresenters [
 { #category : #initialization }
 MiQueriesBrowser >> initializeQueryBuilder [
 
-	queriesListPresenter := self instantiate:
-		                         (MiQueriesListPresenter on: self)
+	queriesListPresenter := self
+		                        instantiate: MiQueriesListPresenter
+		                        on: self
 ]
 
 { #category : #initialization }
@@ -160,7 +161,7 @@ MiQueriesBrowser >> initializeResultTreePresenter [
 
 { #category : #brokerage }
 MiQueriesBrowser >> itemsFor: aClass [
-	^rootQuery allChildren select: [ :query | query isKindOf: aClass ]
+	^rootQuery children select: [ :query | query isKindOf: aClass ]
 ]
 
 { #category : #accessing }
@@ -195,7 +196,8 @@ MiQueriesBrowser >> removeChild: childToRemove fromParent: aParent [
 { #category : #'api - actions' }
 MiQueriesBrowser >> removeQuery: aQuery [
 
-	self removeChild: aQuery fromParent: rootQuery
+	self removeChild: aQuery fromParent: rootQuery.
+	application removeItem: aQuery
 ]
 
 { #category : #'api - actions' }

@@ -14,9 +14,9 @@ Class {
 	#category : #'MooseIDE-Famix-UML'
 }
 
-{ #category : #specs }
-MiUMLBrowser class >> defaultSpec [
-	^ super defaultSpec
+{ #category : #layout }
+MiUMLBrowser class >> defaultLayout [
+	^ super defaultLayout
 		add: #diagram;
 		yourself
 ]

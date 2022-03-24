@@ -30,10 +30,10 @@ MiModelRootBrowser class >> buildModelCommandsGroupWith: presenterInstance [
 			  (MiModelUtilityCommand asCommandGroupWith: presenterInstance)
 ]
 
-{ #category : #specs }
-MiModelRootBrowser class >> defaultSpec [
+{ #category : #layout }
+MiModelRootBrowser class >> defaultLayout [
 
-	^ super defaultSpec
+	^ super defaultLayout
 		  add: #toolbar
 		  withConstraints: [ :constraints | 
 			  constraints height: self toolbarHeight ];
@@ -100,7 +100,6 @@ MiModelRootBrowser >> followEntity: anEntity [
 MiModelRootBrowser >> initializeList [
 
 	modelFilteringList := self newFilteringList.
-
 	modelFilteringList items: MooseModel root.
 	MooseModel root ifNotEmpty: [ :root | 
 		modelFilteringList selectItem: root anyOne.

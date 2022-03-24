@@ -111,7 +111,7 @@ MiMetaBrowser >> initializeEntities [
 MiMetaBrowser >> initializeLayout [
 
 	| toolbar left |
-	toolbar := self class defaultSpec.
+	toolbar := self class defaultLayout.
 	left := SpPanedLayout newTopToBottom
 		        add: (SpPanedLayout newLeftToRight
 				         add: entities;
@@ -138,7 +138,6 @@ MiMetaBrowser >> initializeMap [
 
 { #category : #initialization }
 MiMetaBrowser >> initializePresenters [
-
 	self initializeCommentNoteBook.
 	self initializeEntities.
 	self initializeProperties.

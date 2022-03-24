@@ -44,7 +44,7 @@ Class {
 }
 
 { #category : #specs }
-MiAbstractBrowser class >> defaultSpec [
+MiAbstractBrowser class >> defaultLayout [
 
 	^ SpBoxLayout newVertical
 ]
@@ -102,7 +102,7 @@ MiAbstractBrowser class >> newModel [
 MiAbstractBrowser class >> open [
 
 	^ (self on: self newModel)
-		  openWithSpec;
+		  open;
 		  followBus: self currentApplication defaultBus;
 		  yourself
 ]
@@ -192,6 +192,12 @@ MiAbstractBrowser >> freezeDuring: aBlock [
 	receivingMode := MiFreezeMode.
 
 	aBlock ensure: [ receivingMode := previousMode ]
+]
+
+{ #category : #testing }
+MiAbstractBrowser >> hasSettings [
+
+	^false
 ]
 
 { #category : #actions }
@@ -288,6 +294,13 @@ MiAbstractBrowser >> setDefaultReceivingMode [
 { #category : #'accessing - model' }
 MiAbstractBrowser >> setModelBeforeInitialization: aModel [
 	model := aModel
+]
+
+{ #category : #actions }
+MiAbstractBrowser >> settings [
+	"not used if #hasSettings is false"
+
+	self subclassResponsibility 
 ]
 
 { #category : #actions }
